@@ -1,0 +1,2 @@
+ccs-script /home/homer/scripts/mon-temps.py | tee -a /home/homer/scripts/data/ts7-2-allplatetemps-`date +%s`.txt
+
