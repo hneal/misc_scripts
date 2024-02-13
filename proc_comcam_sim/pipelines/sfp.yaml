@@ -1,0 +1,42 @@
+description: SFP for LSSTComCamSim data
+instrument: lsst.obs.lsst.LsstComCamSim
+tasks:
+  isr:
+    class: lsst.ip.isr.IsrTask
+    config:
+      connections.newBFKernel: bfk
+      doDefect: false
+      doBrighterFatter: false
+      doBias: true
+      doDark: true
+      doFlat: true
+      doLinearize: false
+      doFringe: false
+      doCrosstalk: false
+  characterizeImage:
+    class: lsst.pipe.tasks.characterizeImage.CharacterizeImageTask
+    config:
+      python: |
+        import lsst.meas.extensions.piff.piffPsfDeterminer
+        config.measurePsf.psfDeterminer = "piff"
+  calibrate:
+    class: lsst.pipe.tasks.calibrate.CalibrateTask
+    config:
+      connections.astromRefCat: "uw_stars"
+      connections.photoRefCat: "uw_stars"
+      python: |
+        # No color term in simulation at the moment
+        config.photoCal.applyColorTerms = False
+        config.photoCal.match.referenceSelection.magLimit.fluxField = "lsst_i_flux"
+
+        config.astromRefObjLoader.filterMap = {band: 'lsst_%s' % (band) for band in 'gri'}
+        config.astromRefObjLoader.anyFilterMapsToThis = None
+        config.photoRefObjLoader.filterMap = {band: 'lsst_%s' % (band) for band in 'gri'}
+  writeSourceTable:
+    class: lsst.pipe.tasks.postprocess.WriteSourceTableTask
+  transformSourceTable:
+    class: lsst.pipe.tasks.postprocess.TransformSourceTableTask
+  consolidateSourceTable:
+    class: lsst.pipe.tasks.postprocess.ConsolidateSourceTableTask
+  consolidateVisitSummary:
+    class: lsst.pipe.tasks.postprocess.ConsolidateVisitSummaryTask
