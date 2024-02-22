@@ -1,14 +1,10 @@
 includeConfigs:
 - ${CTRL_BPS_PANDA_DIR}/config/bps_usdf.yaml
 
-#pipelineYaml: "${PWD}/pipelines/sfp.yaml#isr,characterizeImage,calibrate"
-#pipelineYaml: "${DRP_PIPE_DIR}/pipelines/LSSTComCamSim/DRP.yaml#processCcd,sourceTable"
-#pipelineYaml: "${PWD}/pipelines/DRP.yaml#processCcd,sourceTable"
-#pipelineYaml: "${PWD}/pipelines/DRP-hn1.yaml#isr,characterizeImage,calibrate"
-#pipelineYaml: "${PWD}/pipelines/DRP-ops-rehearsal-3-hn1.yaml#isr,characterizeImage,calibrate"
-pipelineYaml: "${PWD}/drp_pipe/pipelines/LSSTComCamSim/DRP-ops-rehearsal-3.yaml#step1,step2a,step2b,step2d,step2e,step3,step4,step5,step6,step7"
+#pipelineYaml: "${PWD}/drp_pipe/pipelines/LSSTComCamSim/DRP-ops-rehearsal-3.yaml#step1,step2a,step2b,step2d,step2e,step3,step4,step5,step6,step7"
+pipelineYaml: "${PWD}/drp_pipe/pipelines/LSSTComCamSim/DRP-ops-rehearsal-3.yaml#step1"
 
-LSST_VERSION: w_2024_04
+LSST_VERSION: w_2024_08
 
 instrument: LsstComCamSim
 project: dev
@@ -25,25 +21,23 @@ custom_lsst_setup: >
 
 payload:
   runInit: true
-  weekly: w_2024_04
+  weekly: w_2024_08
 # ${WEEKLY}
 
 # Ref: butler query-datasets /sdf/group/rubin/repo/ops-rehearsal-3-prep/ raw --collections LSSTComCamSim/raw/all
 #  inCollection: LSSTComCamSim/defaults
-#  inCollection: u/jchiang/flat_50240117_w_2024_04,refcats
-  inCollection: u/jchiang/bfk_50240117_w_2024_04,refcats,skymaps
+  inCollection: u/jchiang/bfk_70240217_w_2024_07,refcats,skymaps
 
   computeSite: SLAC
   payloadName: lsstcomcamsim-pipeline-test
   butlerConfig: /sdf/group/rubin/repo/ops-rehearsal-3-prep
-  dataQuery: "instrument='LSSTComCamSim' and exposure in (5024032100240..5024032100299)"
-# -d "exposure=5024032100061 AND  detector=0 AND skymap='DC2'"
-  dataQuery: "instrument='LSSTComCamSim' and exposure in (5024032100061) and detector=0 and skymap='DC2'"
-#  dataQuery: "instrument='LSSTComCamSim' and exposure in (5024032100061) and detector=0"
-  output: u/{operator}/panda_LSSTComCamSimPipelineTEST_bfk_50240117_w_2024_04
+#  dataQuery: "instrument='LSSTComCamSim' and exposure in (7024021700000..7024021700299)"
+  dataQuery: "instrument='LSSTComCamSim' and exposure in (7024040400031)"
+#  dataQuery: "instrument='LSSTComCamSim' and exposure in (7024040100916..7024040400918)"
+  output: u/{operator}/panda_LSSTComCamSimPipelineTEST_bfk_70240217_w_2024_07
   s3EndpointUrl: "https://storage.googleapis.com"
   payloadFolder: payload
   fileDistributionEndPoint: "file:///sdf/group/rubin/panda_jobs/{operator}/panda_cache_box/{payloadFolder}/{uniqProcName}/"
 
-sw_image: "lsstsqre/centos:7-stack-lsst_distrib-w_2024_04"
+sw_image: "lsstsqre/centos:7-stack-lsst_distrib-w_2024_08"
 
