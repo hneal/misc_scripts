@@ -3,7 +3,8 @@ then
 #    # set up the most recently available weekly
 #    foo=`/usr/bin/ls -rt /cvmfs/sw.lsst.eu/linux-x86_64/lsst_distrib | grep ^w_20`
 #    weekly_version=`echo $foo | awk -F ' ' '{print $NF}'`
-    weekly_version=w_2024_04
+#    weekly_version=w_2024_04
+    weekly_version=w_2024_08
 else
     # set up the requested weekly
     weekly_version=$1

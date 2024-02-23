@@ -1,6 +1,6 @@
 #!/bin/bash
 # setup Rubin env
-export LSST_VERSION=w_2024_04
+export LSST_VERSION=w_2024_08
 #export LSST_VERSION=w_2023_24
 #export LSST_VERSION=w_2022_48
 #export LSST_VERSION=w_2022_41

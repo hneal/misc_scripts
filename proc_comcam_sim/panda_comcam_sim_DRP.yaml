@@ -2,7 +2,7 @@ includeConfigs:
 - ${CTRL_BPS_PANDA_DIR}/config/bps_usdf.yaml
 
 #pipelineYaml: "${PWD}/drp_pipe/pipelines/LSSTComCamSim/DRP-ops-rehearsal-3.yaml#step1,step2a,step2b,step2d,step2e,step3,step4,step5,step6,step7"
-pipelineYaml: "${PWD}/drp_pipe/pipelines/LSSTComCamSim/DRP-ops-rehearsal-3.yaml#step1"
+pipelineYaml: "${DRP_PIPE_DIR}/pipelines/LSSTComCamSim/DRP-ops-rehearsal-3.yaml#step1"
 
 LSST_VERSION: w_2024_08
 
